@@ -1,0 +1,36 @@
+﻿@model WebII_Lab05_Paco_Ramos_Aaron_Pedro_Ejercicio.Models.InvestmentModel
+
+@{
+    ViewBag.Title = "Resultado del Cálculo de Interés Compuesto";
+}
+
+<h2>Resultado</h2>
+
+<p><strong>Capital Inicial:</strong> @Model.CapitalInicial</p>
+<p><strong>Tasa de Interés Anual:</strong> @Model.TasaInteres %</p>
+<p><strong>Número de Años:</strong> @Model.NumeroAnios</p>
+<p><strong>Frecuencia de Capitalización:</strong> @Model.Frecuencia</p>
+
+<h3>Total Acumulado:</h3>
+<p><strong>@Model.Breakdown.Last().Capital.ToString("C")</strong></p>
+
+<h3>Desglose Año por Año:</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Año</th>
+            <th>Capital Acumulado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var breakdown in Model.Breakdown)
+        {
+            <tr>
+                <td>@breakdown.Year</td>
+                <td>@breakdown.Capital.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>@Html.ActionLink("Volver", "Index", "Investment", new { }, new { @class = "btn btn-primary" })</p>
